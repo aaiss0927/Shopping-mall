@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+    <insert id="signup" parameterType="member">
+        insert into member_table(memberId, memberPassword, memberName, memberEmail, memberTel, memberSex)
+        values (#{memberId}, #{memberPassword}, #{memberName}, #{memberEmail}, #{memberTel}, #{memberSex})
+    </insert>
+    <select id="login" parameterType="member" resultType="member">
+        select * from member_table where memberId=#{memberId} and memberPassword=#{memberPassword}
+    </select>
+    <select id="findAll" resultType="member">
+        select * from member_table
+    </select>
+    <select id="findById" parameterType="Long" resultType="member">
+        select * from member_table where id=#{id}
+    </select>
+    <delete id="delete" parameterType="Long">
+        delete from member_table where manage_id=#{manage_id}
+    </delete>
+    <select id="findByMemberId" parameterType="String" resultType="member">
+        select * from member_table where memberId=#{loginId}
+    </select>
+    <update id="update" parameterType="member">
+        update member_table set memberEmail=#{memberEmail}, memberTel=#{memberTel}
+        where id=#{id}
+    </update>
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="member">
+        select * from member_table order by manage_id desc limit #{start}, #{limit}
+    </select>
+    <select id="memberCount" resultType="Integer">
+        select count(manage_id) from member_table
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
