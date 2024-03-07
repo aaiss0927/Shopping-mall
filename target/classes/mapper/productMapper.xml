@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Product">
+    <select id="findCsv" resultType="product">
+        select * from product_table where productCategory LIKE 'CSV'
+    </select>
+    <select id="findMod" resultType="product">
+        select * from product_table where productCategory LIKE 'MOD'
+    </select>
+    <select id="findLiquid" resultType="product">
+        select * from product_table where productCategory LIKE 'LIQUID'
+    </select>
+    <select id="findSub" resultType="product">
+        select * from product_table where productCategory LIKE 'SUBSCRIBE'
+    </select>
+    <select id="findBySku" parameterType="int" resultType="product">
+        select * from product_table where productSku=#{productSku}
+    </select>
+    <select id="findAll" resultType="product">
+        select * from product_table
+    </select>
+    <delete id="delete" parameterType="Long">
+        delete from product_table where productSku=#{productSku}
+    </delete>
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="product">
+        select * from product_table order by productSku asc limit #{start}, #{limit}
+    </select>
+    <select id="productCount" resultType="Integer">
+        select count(productSku) from product_table
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
